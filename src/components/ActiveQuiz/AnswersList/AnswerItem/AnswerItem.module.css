@@ -1,0 +1,21 @@
+.AnswerItem {
+    margin: 10px;
+    padding: 5px 50px 5px 50px;
+    box-shadow: inset 1px 1px 2px 2px rgba(72,61,139,1);
+    border-radius: 15px;
+    text-align: center;
+    background-color: #6555cc;
+    transition-duration: 0.3s;
+}
+
+.AnswerItem:hover {
+    background-color: #7262dd;
+}
+
+.AnswerItem.success {
+    box-shadow: inset 0px 0px 2px 2px #00ab00;
+}
+
+.AnswerItem.error {
+    box-shadow: inset 0px 0px 2px 2px red;
+}

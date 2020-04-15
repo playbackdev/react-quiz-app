@@ -1,0 +1,51 @@
+.FinishedQuiz {
+    color: white;
+    padding: 20px 30px 20px 30px;
+    box-shadow: 1px 2px 4px 3px darkslateblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.FinishedQuiz>ul {
+    list-style: none;
+    padding: 0px;
+    margin: 10px auto;
+}
+
+.FinishedQuiz button {
+    color: white;
+    font-weight: bold;
+    padding: 10px 30px 10px 30px;
+    background-color: #7262dd;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.3s, 0.2s;
+    border: 0;
+    box-shadow: 1px 1px 2px 2px darkslateblue;
+}
+
+.FinishedQuiz button:hover {
+    background-color: #8267f2;
+    cursor: pointer;
+}
+
+.FinishedQuiz button:active {
+    background-color: #645dc9;
+    box-shadow: 0px 0px 1px 1px darkslateblue;
+}
+
+.FinishedQuiz button:focus {
+    outline:none;
+}
+
+.FinishedQuiz i {
+    margin-left: 10px;
+}
+
+.success {
+    color: #00ab00;
+}
+
+.error {
+    color: red;
+}

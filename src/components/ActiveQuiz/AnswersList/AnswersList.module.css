@@ -1,0 +1,6 @@
+.AnswersList {
+    list-style: none;
+    padding: 0px;
+    margin: 10px auto;
+    cursor: pointer;
+}

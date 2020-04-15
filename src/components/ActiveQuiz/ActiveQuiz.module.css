@@ -1,0 +1,18 @@
+.ActiveQuiz {
+    color: white;
+    padding: 20px 30px 20px 30px;
+    box-shadow: 1px 2px 4px 3px darkslateblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.ActiveQuiz>p {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ActiveQuiz>p>small {
+    color: #c1c1c1;
+}
