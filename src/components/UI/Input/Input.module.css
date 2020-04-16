@@ -1,0 +1,41 @@
+.Input {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Input label {
+    margin-bottom: 3px;
+    padding:0;
+    display: block;
+    font-weight: bold;
+    color: white;
+}
+
+.Input input {
+    color: white;
+    font-size: 1.2rem;
+    padding: 8px;
+    background-color: rgba(0,0,0,.1);
+    outline: none;
+    margin-bottom: 5px;
+    border-radius: 3px;
+    border: 1px solid rgba(0,0,0,.2);
+    box-shadow: inset 1px 1px 1px 1px rgba(72,61,139,1);
+    transition: border-color .3s;
+}
+
+.Input input:focus {
+    border-color: rgba(255,255,255,.4);
+}
+
+.Input span {
+    color: #ff6461;
+    font-size: 12px;
+}
+.Input.invalid label{
+    color: #ff6461;
+}
+.Input.invalid input {
+    border-color: #ff6461;
+}
