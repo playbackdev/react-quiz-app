@@ -37,11 +37,20 @@ export default class Auth extends Component {
     };
 
     loginHandler = () => {
+        if(!this.state.isFormValid) {
+            console.log('INVALID');
+            return;
+        }
+        console.log('VALID');
 
     };
 
     registerHandler = () => {
-
+        if(!this.state.isFormValid) {
+            console.log('INVALID');
+            return;
+        }
+        console.log('VALID');
     };
 
     submitHandler = (event) => {
@@ -138,13 +147,11 @@ export default class Auth extends Component {
                             <Button
                             type="success"
                             onClick={this.loginHandler}
-                            disabled={!this.state.isFormValid}
                             >Войти
                             </Button>
                             <Button
                                 type="primary"
                                 onClick={this.registerHandler}
-                                disabled={!this.state.isFormValid}
                             >Зарегистрироваться
                             </Button>
                         </div>

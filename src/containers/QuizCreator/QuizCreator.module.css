@@ -1,22 +1,31 @@
-.Auth {
+.QuizCreator {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-grow: 1;
     width: 100%;
-    background: linear-gradient(25deg, #5041b2 30%, #e65097 130%);
+    background: linear-gradient(50deg, #6e1f38 20%, #a86655 100%);
 }
 
-.Auth h1 {
+.QuizCreator h1 {
     color: white;
     margin: 10px 30px 20px 30px;
 }
 
-.Auth form {
+hr {
+    border-color: rgba(0,0,0, .3);
+    margin-bottom: 25px;
+}
+
+.QuizCreator form {
     display: flex;
     flex-direction: column;
     padding: 20px 40px 20px 40px;
     box-shadow: 1px 2px 4px 3px rgba(0,0,0, .35);
-    background-color: rgba(0,0,0, .15);
+    background-color: rgba(0,0,0,0.2);
+}
+
+.QuizCreator div p {
+    color: white;
 }

@@ -1,10 +1,10 @@
-.Input {
-     margin-bottom: 15px;
-     display: flex;
-     flex-direction: column;
- }
+.Select {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
 
-.Input label {
+.Select label {
     margin-bottom: 3px;
     padding:0;
     display: block;
@@ -12,30 +12,20 @@
     color: white;
 }
 
-.Input input {
+.Select select {
     color: white;
     font-size: 1.2rem;
     padding: 8px;
+    box-sizing: border-box;
     background-color: rgba(0,0,0,.1);
     outline: none;
     margin-bottom: 5px;
     border-radius: 3px;
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: inset 1px 1px 1px 1px rgba(0,0,0, .25);
-    transition: border-color .3s;
+    transition: all .3s;
 }
 
-.Input input:focus {
-    border-color: rgba(255,255,255,.4);
-}
-
-.Input span {
-    color: #ff6461;
-    font-size: 12px;
-}
-.Input.invalid label{
-    color: #ff6461;
-}
-.Input.invalid input {
-    border-color: #ff6461;
+.Select select option {
+    background-color: #a43b58;
 }
