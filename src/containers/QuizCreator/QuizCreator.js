@@ -4,7 +4,8 @@ import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
 import {createControl, validate, validateFormForQuestion} from "../../form/formHandler";
-import axios from 'axios';
+import {connect} from "react-redux";
+import {createQuizQuestion, finishCreateQuiz, resetQuizCreation} from "../../store/actions/create";
 
 function createOptionControl(num) {
     return createControl({
@@ -16,7 +17,6 @@ function createOptionControl(num) {
 }
 
 function createFormControls(quizName = '') {
-    console.log(quizName);
     return {
         quizName: createControl({
             label: 'Название теста',
@@ -35,18 +35,12 @@ function createFormControls(quizName = '') {
     };
 }
 
-export default class QuizCreator extends Component {
+class QuizCreator extends Component {
 
     state = {
-        //в этот массив будем добавлять вопросы
-        quiz: {
-            name: '',
-            questions: []
-        },
         rightAnswerId: 1,
         formControls: createFormControls(),
         isFormValid: false,
-        quizAddedMessage: ''
     };
 
     submitHandler = event => {
@@ -59,9 +53,7 @@ export default class QuizCreator extends Component {
         //если валидная форма
         if(this.state.isFormValid) {
             const quizName = this.state.formControls.quizName.value;
-            const quizQuestions = this.state.quiz.questions.concat();//возвращаем копию массива
-
-            const index = quizQuestions.length + 1;
+            const index = this.props.questions.length + 1;
             const questionItem = {
                 question: this.state.formControls.question.value,
                 id: index,
@@ -85,17 +77,13 @@ export default class QuizCreator extends Component {
                     },
                 ]
             };
-            //добавляем объект в массив
-            quizQuestions.push(questionItem);
+            //добавляем вопрос в стейт
+            this.props.createQuizQuestion(questionItem);
             //изменяем состояние и обнуляем форму
             this.setState({
-                quiz: {
-                    name: quizName,
-                    questions: quizQuestions
-                },
                 rightAnswerId: 1,
                 formControls: createFormControls(quizName),
-                isFormValid: false,
+                isFormValid: false
             });
         }
 
@@ -106,35 +94,14 @@ export default class QuizCreator extends Component {
         const quizName = this.state.formControls.quizName.value.trim();
         this.validateInputs(['quizName']);
         //если есть хотя бы один вопрос и форма валидна для создания теста
-        if(this.state.quiz.questions.length !== 0 && quizName !== '') {
-            //записываем в бд
-            try {
-                //пересохраняем имя из формы в стейт
-                const quiz = {...this.state.quiz};
-                quiz.name = quizName;
-                this.setState({quiz})
-                //
-                await axios.post('https://react-quiz-gp.firebaseio.com/quizes.json', this.state.quiz);
-
-                //обнуляем стейт
-                this.setState({
-                    quiz: {
-                        name: '',
-                        questions: []
-                    },
-                    rightAnswerId: 1,
-                    formControls: createFormControls(),
-                    isFormValid: false,
-                    quizAddedMessage: `Тест "${this.state.quiz.name}" успешно создан`
-                });
-
-                setTimeout(() =>{
-                    this.setState({quizAddedMessage: ''})
-                }, 2000);
-
-            } catch(e) {
-                console.log(e);
-            }
+        if(this.props.questions.length !== 0 && quizName !== '') {
+            this.props.finishCreateQuiz(quizName);
+            //обнуляем стейт
+            this.setState({
+                rightAnswerId: 1,
+                formControls: createFormControls(),
+                isFormValid: false,
+            });
         }
     };
 
@@ -220,6 +187,10 @@ export default class QuizCreator extends Component {
         )
     }
 
+    componentWillUnmount() {
+        this.props.resetQuizCreation();
+    }
+
     render() {
         return (
             <div className={classes.QuizCreator}>
@@ -245,17 +216,10 @@ export default class QuizCreator extends Component {
                         >Создать тест
                         </Button>
                     </div>
-                    { this.state.quiz.questions.length !== 0
-                        ? <div>
-                            <p>Добавлено вопросов: {this.state.quiz.questions.length}</p>
-                        </div>
-                        :null
-                    }
-
                     {
-                        this.state.quizAddedMessage !== ''
+                        this.props.message !== ''
                             ? <div>
-                                <p>{this.state.quizAddedMessage}</p>
+                                <p>{this.props.message}</p>
                             </div>
                             :null
 
@@ -266,3 +230,21 @@ export default class QuizCreator extends Component {
         )
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        name: state.create.name,
+        questions: state.create.questions,
+        message: state.create.message
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        createQuizQuestion: item => dispatch(createQuizQuestion(item)),
+        finishCreateQuiz: (name) => dispatch(finishCreateQuiz(name)),
+        resetQuizCreation: () => dispatch(resetQuizCreation())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuizCreator);

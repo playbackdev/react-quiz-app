@@ -22,6 +22,19 @@ export function validate(value, validation = null) {
     return isValid;
 }
 
+export function validateForm(formControls) {
+    let isFormValid = true;
+
+    for (let control in formControls) {
+        //если есть у самого объекта (а не у прототипа)
+        if(formControls.hasOwnProperty(control)) {
+            isFormValid = formControls[control].valid && isFormValid;
+        }
+    }
+
+    return isFormValid;
+}
+
 export function validateFormForQuestion(formControls) {
     let isFormValid = true;
 

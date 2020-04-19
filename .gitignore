@@ -5,7 +5,10 @@
 /.pnp
 .pnp.js
 .idea
-
+/src/firebaseConfig
+/src/firebaseConfig/firebaseConfig.js
+/src/axios
+/src/axios/axios-quiz.js
 # testing
 /coverage
 

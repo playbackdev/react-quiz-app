@@ -3,8 +3,10 @@ import classes from './Auth.module.css'
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import is from 'is_js';
+import {connect} from "react-redux";
+import {auth} from "../../store/actions/auth";
 
-export default class Auth extends Component {
+class Auth extends Component {
 
     state = {
         isFormValid: false,
@@ -37,20 +39,25 @@ export default class Auth extends Component {
     };
 
     loginHandler = () => {
-        if(!this.state.isFormValid) {
-            console.log('INVALID');
-            return;
+        this.validateInputs(['email', 'password']);
+        if(this.state.isFormValid) {
+            this.props.auth(
+                this.state.formControls.email.value,
+                this.state.formControls.password.value,
+                true
+            );
         }
-        console.log('VALID');
-
     };
 
     registerHandler = () => {
-        if(!this.state.isFormValid) {
-            console.log('INVALID');
-            return;
+        this.validateInputs(['email', 'password']);
+        if(this.state.isFormValid) {
+            this.props.auth(
+                this.state.formControls.email.value,
+                this.state.formControls.password.value,
+                false
+            );
         }
-        console.log('VALID');
     };
 
     submitHandler = (event) => {
@@ -88,6 +95,31 @@ export default class Auth extends Component {
         return isValid;
 
     }
+
+    validateInputs = (names) => {
+        //клонируем стейт контрола
+        const formControls = { ...this.state.formControls };
+
+        for(let name of names) {
+            const control = {...formControls[name]};
+            control.touched = true;
+            control.valid = this.validateControl(control.value, control.validation);
+            //обновляем объект контрола
+            formControls[name] = control;
+        }
+
+        //валидация всей формы
+        let isFormValid = true;
+
+        Object.keys(formControls).forEach(name => {
+            isFormValid = formControls[name].valid && isFormValid;
+        });
+
+        this.setState({
+            formControls,
+            isFormValid
+        });
+    };
 
     onChangeHandler = (event, controlName) => {
         //копируем объекты из стейта
@@ -161,3 +193,11 @@ export default class Auth extends Component {
         )
     }
 }
+
+function mapDispatchToProps(dispatch) {
+    return {
+        auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Auth);
