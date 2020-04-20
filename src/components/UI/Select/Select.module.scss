@@ -1,3 +1,5 @@
+@import '../../../style/media';
+
 .Select {
     margin-bottom: 15px;
     display: flex;
@@ -10,6 +12,9 @@
     display: block;
     font-weight: bold;
     color: white;
+    @include mq-to-xs {
+        margin-left: 5px;
+    }
 }
 
 .Select select {
@@ -24,6 +29,10 @@
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: inset 1px 1px 1px 1px rgba(0,0,0, .25);
     transition: all .3s;
+    @include mq-to-xs {
+        margin: 0 5px 3px 5px;
+        padding: 4px;
+    }
 }
 
 .Select select option {

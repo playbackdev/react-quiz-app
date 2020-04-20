@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './Select.module.css'
+import classes from './Select.module.scss'
 
 export default function Select(props) {
     const htmlFor = `${props.label}-${Math.random()}`

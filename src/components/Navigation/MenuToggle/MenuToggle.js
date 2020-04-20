@@ -1,5 +1,5 @@
 import React from "react";
-import classes from './MenuToggle.module.css'
+import classes from './MenuToggle.module.scss'
 
 const MenuToggle = props => {
     const cls = [

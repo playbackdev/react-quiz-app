@@ -1,3 +1,5 @@
+@import '../../../style/media';
+
 .MenuToggle {
     position: fixed;
     top: 40px;
@@ -7,6 +9,10 @@
     color: white;
     transition: opacity, left .22s ease-in;
     z-index: 100;
+    @include mq-to-xs {
+        top: 10px;
+        left: 10px;
+    }
 }
 
 .MenuToggle:hover {

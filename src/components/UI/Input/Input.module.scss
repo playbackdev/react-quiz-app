@@ -1,3 +1,5 @@
+@import '../../../style/media';
+
 .Input {
      margin-bottom: 15px;
      display: flex;
@@ -10,6 +12,9 @@
     display: block;
     font-weight: bold;
     color: white;
+    @include mq-to-xs {
+        margin-left: 5px;
+    }
 }
 
 .Input input {
@@ -23,6 +28,10 @@
     border: 1px solid rgba(0,0,0,.2);
     box-shadow: inset 1px 1px 1px 1px rgba(0,0,0, .25);
     transition: border-color .3s;
+    @include mq-to-xs {
+        margin: 0 5px 3px 5px;
+        padding: 4px;
+    }
 }
 
 .Input input:focus {
@@ -32,6 +41,9 @@
 .Input span {
     color: #ff6461;
     font-size: 12px;
+    @include mq-to-xs {
+        margin-left: 5px;
+    }
 }
 .Input.invalid label{
     color: #ff6461;

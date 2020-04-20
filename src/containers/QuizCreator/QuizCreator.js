@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import classes from './QuizCreator.module.css';
+import classes from './QuizCreator.module.scss';
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";

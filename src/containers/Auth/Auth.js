@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import classes from './Auth.module.css'
+import classes from './Auth.module.scss'
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import is from 'is_js';
 import {connect} from "react-redux";
 import {auth} from "../../store/actions/auth";
+import AuthError from "../../components/Error/AuthError";
 
 class Auth extends Component {
 
@@ -186,11 +187,21 @@ class Auth extends Component {
                                 onClick={this.registerHandler}
                             >Зарегистрироваться
                             </Button>
+                            { this.props.error
+                                ? <AuthError message={this.props.error}/>
+                                : null
+                            }
                         </div>
                     </form>
                 </div>
             </div>
         )
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        error: state.auth.error
     }
 }
 
@@ -200,4 +211,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

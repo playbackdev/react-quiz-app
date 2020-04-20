@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './style/media.scss';
 import Layout from './hoc/Layout/Layout'
 import Quiz from './containers/Quiz/Quiz'
 import QuizList from "./containers/QuizList/QuizList";
